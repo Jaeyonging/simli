@@ -1,0 +1,46 @@
+.card-container {
+    width: 50%;
+    padding: 20px;
+    background-color: #f0f0f0;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+}
+
+.card-title {
+    font-size: 1.5rem;
+    text-align: left;
+    padding-bottom: 30px;
+}
+
+.card-ques {
+    margin-bottom: 20px;
+    padding-left: 20px;
+}
+
+.radio-column {
+    display: flex;
+    flex-direction: column;
+}
+
+.radio-option {
+    margin-bottom: 10px;
+}
+
+.card-buttons {
+    display: flex;
+    justify-content: space-between;
+}
+
+.btn {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}
