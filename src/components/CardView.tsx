@@ -5,13 +5,16 @@ import { AppDispatch, RootState } from '../store/configureStore';
 import { FetchQuestions } from '../api';
 import { QTest } from '../types/qtypes';
 import { addAnswers } from '../store/qtestSlice';
+import { ResultSurvey } from './ResultSurvey';
 
 interface Props {
     qtype: string
+    gender: string
 }
 
-export const CardView = ({ qtype }: Props) => {
+export const CardView = ({ qtype, gender }: Props) => {
     const [count, setCount] = useState(0);
+    const [isFinished, setFinished] = useState(false)
     const [answer, setAnswer] = useState("")
     const [data, setData] = useState<QTest[] | null>(null);
     const [nextbuttonText, setNextButtonText] = useState("다음")
@@ -48,50 +51,60 @@ export const CardView = ({ qtype }: Props) => {
         });
 
         if (count === data.length - 1) {
-            dispatch(addAnswers({ qnum: (count + 1).toString(), answer: answer }))
-            //다음페이지로 이동 
+            dispatch(addAnswers(answer))
+            setFinished(true)
+
             return;
         }
         if (count === data.length - 2) {
             setNextButtonText("결과보기");
             setCount(count + 1);
-            dispatch(addAnswers({ qnum: (count + 1).toString(), answer: answer }))
+            dispatch(addAnswers(answer))
             return;
         }
 
         setCount(count + 1);
-        dispatch(addAnswers({ qnum: (count + 1).toString(), answer: answer }))
+        dispatch(addAnswers(answer))
+
     };
 
     console.log(qtestState)
+
     return (
         <>
             <div className='card-container'>
-                {data === null ? (
-                    <div>Loading...</div>
-                ) : (
-                    <>
-                        <h2 className='card-title'>{count + 1}/{data.length}{data[count].question}</h2>
-                        <div className='card-ques'>
-                            <div className='radio-row'>
-                                <form onSubmit={handleFormSubmit}>
-                                    {[1, 2, 3, 4, 5].map((index) => (
-                                        <div className='radio-option' key={index}>
-                                            <Radio name="answer" value={index.toString()} setValue={setAnswer}>
-                                                {index}. {data[count][`answer0${index}` as keyof QTest]}
-                                            </Radio>
 
-                                        </div>
-                                    ))}
-                                    <div className='card-buttons'>
-                                        <button className={`submitbtn ${isSelected ? 'selected' : 'notselected'}`} type='submit' disabled={!isSelected}>
-                                            {nextbuttonText}
-                                        </button>
+                {!isFinished ? (
+                    <>
+                        {data === null ? (
+                            <div>Loading...</div>
+                        ) : (
+                            <>
+                                <h2 className='card-title'>{count + 1}/{data.length}{data[count].question}</h2>
+                                <div className='card-ques'>
+                                    <div className='radio-row'>
+                                        <form onSubmit={handleFormSubmit}>
+                                            {[1, 2, 3, 4, 5].map((index) => (
+                                                <div className='radio-option' key={index}>
+                                                    <Radio name="answer" value={index.toString()} setValue={setAnswer}>
+                                                        {index}. {data[count][`answer0${index}` as keyof QTest]}
+                                                    </Radio>
+
+                                                </div>
+                                            ))}
+                                            <div className='card-buttons'>
+                                                <button className={`submitbtn ${isSelected ? 'selected' : 'notselected'}`} type='submit' disabled={!isSelected}>
+                                                    {nextbuttonText}
+                                                </button>
+                                            </div>
+                                        </form>
                                     </div>
-                                </form>
-                            </div>
-                        </div>
+                                </div>
+                            </>
+                        )}
                     </>
+                ) : (
+                    <ResultSurvey gender={gender}></ResultSurvey>
                 )}
             </div>
 

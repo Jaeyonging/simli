@@ -23,7 +23,6 @@ export const DropDown = () => {
             </Dropdown.Toggle>
 
             <Dropdown.Menu>
-                <Dropdown.Item eventKey="진로흥미탐색">진로흥미탐색</Dropdown.Item>
                 <Dropdown.Item eventKey="진로개발준비도검사">진로개발준비도검사</Dropdown.Item>
                 <Dropdown.Item eventKey="이공계전공적합도검사">이공계전공적합도검사</Dropdown.Item>
                 <Dropdown.Item eventKey="주요능력효능감검사">주요능력효능감검사</Dropdown.Item>

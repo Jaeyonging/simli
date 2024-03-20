@@ -8,7 +8,7 @@ export const Home = () => {
 
     <div className='main-container'>
       <div className='main-title'>
-        진로 심리 검사
+        진로 검사
       </div>
       <div>
         <Choser></Choser>

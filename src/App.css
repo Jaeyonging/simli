@@ -109,11 +109,19 @@
 }
 
 .choser_menu {
-    margin-bottom: 5%;
+    margin-bottom: 20px;
 }
 
 .choser_img {
     width: 30%;
     padding-top: 5%;
     padding-bottom: 5%;
+}
+
+.gender-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100px;
+    margin: auto;
+    margin-bottom: 20px;
 }
