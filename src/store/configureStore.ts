@@ -1,11 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
 import user from "./userSlice";
 import qtest from "./qtestSlice";
+import qtype from "./qtypeSlice";
 
 const store = configureStore({
     reducer: {
         user: user.reducer,
-        qtest: qtest.reducer
+        qtest: qtest.reducer,
+        qType: qtype.reducer
     }
 });
 
