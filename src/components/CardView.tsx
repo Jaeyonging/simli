@@ -4,13 +4,21 @@ import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../store/configureStore';
 import { FetchQuestions } from '../api';
 import { QTest } from '../types/qtypes';
+import { addAnswers } from '../store/qtestSlice';
 
 interface Props {
     qtype: string
 }
 
 export const CardView = ({ qtype }: Props) => {
+    const [count, setCount] = useState(0);
+    const [answer, setAnswer] = useState("")
     const [data, setData] = useState<QTest[] | null>(null);
+    const [nextbuttonText, setNextButtonText] = useState("다음")
+    const [isSelected, setSeleccted] = useState(false)
+    const qtestState = useSelector((state: RootState) => state.qtest);
+
+    const dispatch = useDispatch<AppDispatch>();
 
     useEffect(() => {
         FetchQuestions(qtype).then((res) => {
@@ -18,68 +26,75 @@ export const CardView = ({ qtype }: Props) => {
             setData(res.data.RESULT);
         });
 
-    }, []);
+    }, [qtype]);
 
-    const [count, setCount] = useState(0);
-    const [nextbuttonText, setNextButtonText] = useState("다음")
-    const [prevbuttonText, setPrevButtonText] = useState("이전")
-    const qtestState = useSelector((state: RootState) => state.qtest);
-    const dispatch = useDispatch<AppDispatch>();
-    const handleNext = () => {
+    useEffect(() => {
+        if (answer) {
+            console.log("anwer checked")
+            setSeleccted(true)
+        }
+    }, [answer])
+
+    const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault()
         if (data == null) return
+
+        //버튼 해제
         const radioButtons = document.getElementsByName("answer") as NodeListOf<HTMLInputElement>;
         radioButtons.forEach((button) => {
             button.checked = false;
+            setSeleccted(false)
+            setAnswer("")
         });
 
         if (count === data.length - 1) {
+            dispatch(addAnswers({ qnum: (count + 1).toString(), answer: answer }))
+            //다음페이지로 이동 
             return;
         }
         if (count === data.length - 2) {
             setNextButtonText("결과보기");
             setCount(count + 1);
+            dispatch(addAnswers({ qnum: (count + 1).toString(), answer: answer }))
             return;
         }
+
         setCount(count + 1);
+        dispatch(addAnswers({ qnum: (count + 1).toString(), answer: answer }))
     };
 
-    const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault()
-        const target = e.target as typeof e.target & {
-            answer: { value: string };
-        };
-        console.log(target.answer.value);
-        handleNext();
-    };
-
-
-
+    console.log(qtestState)
     return (
         <>
-            {data === null ? (
-                <div>Loading...</div>
-            ) : (
-                <div className='card-container'>
-                    <h2 className='card-title'>{data[count].question}</h2>
-                    <div className='card-ques'>
-                        <div className='radio-row'>
-                            <form onSubmit={handleFormSubmit}>
-                                {[1, 2, 3, 4, 5].map((index) => (
-                                    <div className='radio-option' key={index}>
-                                        <Radio name="answer" value={index.toString()}>
-                                            {index}. {data[count][`answer0${index}` as keyof QTest]}
-                                        </Radio>
+            <div className='card-container'>
+                {data === null ? (
+                    <div>Loading...</div>
+                ) : (
+                    <>
+                        <h2 className='card-title'>{count + 1}/{data.length}{data[count].question}</h2>
+                        <div className='card-ques'>
+                            <div className='radio-row'>
+                                <form onSubmit={handleFormSubmit}>
+                                    {[1, 2, 3, 4, 5].map((index) => (
+                                        <div className='radio-option' key={index}>
+                                            <Radio name="answer" value={index.toString()} setValue={setAnswer}>
+                                                {index}. {data[count][`answer0${index}` as keyof QTest]}
+                                            </Radio>
 
+                                        </div>
+                                    ))}
+                                    <div className='card-buttons'>
+                                        <button className={`submitbtn ${isSelected ? 'selected' : 'notselected'}`} type='submit' disabled={!isSelected}>
+                                            {nextbuttonText}
+                                        </button>
                                     </div>
-                                ))}
-                                <div className='card-buttons'>
-                                    <button className='submitbtn' type='submit'>{nextbuttonText}</button>
-                                </div>
-                            </form>
+                                </form>
+                            </div>
                         </div>
-                    </div>
-                </div>
-            )}
+                    </>
+                )}
+            </div>
+
         </>
 
     );

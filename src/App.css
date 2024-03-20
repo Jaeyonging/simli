@@ -1,5 +1,7 @@
 .card-container {
-    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    margin-top: 50px;
     width: 100%;
     padding: 20px;
     background-color: #f0f0f0;
@@ -9,8 +11,8 @@
 }
 
 .card-title {
-    font-size: 1.5rem;
-    text-align: left;
+    font-size: 20px;
+    text-align: center;
     padding-bottom: 30px;
 }
 
@@ -25,7 +27,11 @@
 }
 
 .radio-option {
-    margin-bottom: 10px;
+    text-align: left;
+    margin: auto;
+    margin-top: 20px;
+    width: 25%;
+
 }
 
 .card-buttons {
@@ -35,7 +41,6 @@
 
 .submitbtn {
     padding: 10px 20px;
-    background-color: #007bff;
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -45,16 +50,27 @@
     margin-top: 20px;
 }
 
-.submitbtn:hover {
-    background-color: #0056b3;
+.submitbtn.selected {
+    background-color: rgb(82, 82, 255);
+    color: #000;
+}
+
+.submitbtn.notselected {
+    background-color: rgb(161, 161, 161);
+    color: #000;
+}
+
+.submitbtn.selected:hover {
+    background-color: #1c8aff;
 }
 
 .main-container {
-    margin: auto;
+    position: absolute;
+    left: 10%;
     width: 80%;
+    height: 65%;
     background-color: yellow;
     border-radius: 40px;
-    display: flex;
     justify-content: center;
     flex-direction: column;
     align-items: center;

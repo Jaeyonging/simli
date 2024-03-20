@@ -7,9 +7,6 @@ export interface QTest {
     answer05: string
 }
 
-export interface QTestState {
-    [key: string]: string;
-}
 
 export const QMap: Map<string, string> = new Map([
     ["진로흥미탐색", "19"],

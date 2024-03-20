@@ -8,11 +8,12 @@ import { QMap } from '../types/qtypes';
 export const Choser = () => {
     const [qtype, setQtype] = useState<string>("");
     const qtypeState = useSelector((state: RootState) => state.qType);
-
+    const [isVisible, setVisible] = useState(true)
 
     const OnClickBtn = () => {
         if (qtypeState) {
             console.log("onclick")
+            setVisible(false)
             setQtype(QMap.get(qtypeState) || "");
         }
     };
@@ -20,17 +21,27 @@ export const Choser = () => {
     return (
         <>
             <div className='choser_container'>
-                <div>
-                    <img className="choser_img" src='./TestImg.webp' alt="Test Image" />
-                </div>
-                <div className='choser_menu'>
-                    <DropDown />
-                </div>
-                <div className='choser_btn'>
-                    <button className='choser_startBtn' onClick={OnClickBtn}>실시하기</button>
-                </div>
+                {isVisible ? (
+                    <>
+                        <div>
+                            <img className="choser_img" src='./TestImg.webp' alt="Test Image" />
+                        </div>
+                        <div className='choser_menu'>
+                            <DropDown />
+                        </div>
+                        <div className='choser_btn'>
+                            <button className='choser_startBtn' onClick={OnClickBtn}>실시하기</button>
+                        </div>
+                    </>
+
+                ) : (
+
+                    <>
+                        {qtype ? (<CardView qtype={qtype}></CardView>) : (<div></div>)}
+                    </>
+                )}
             </div>
-            {qtype ? (<CardView qtype={qtype}></CardView>) : (<div></div>)}
+
         </>
     );
 };
