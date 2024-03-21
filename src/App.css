@@ -75,15 +75,15 @@
 
 .main-container {
     display: flex;
-    margin: auto;
+    flex-direction: column;
     background-color: yellow;
     border-radius: 40px;
     justify-content: center;
-    flex-direction: column;
     align-items: center;
     text-align: center;
-    margin-top: 10%;
     width: 500px;
+    margin: auto;
+    margin-top: 230px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
@@ -156,4 +156,14 @@
 
 .result-btn:hover {
     background-color: rgb(134, 134, 245);
+}
+
+@media screen and (max-width: 768px) {
+    .main-container {
+        margin-top: 300px;
+    }
+
+    .introduction-title {
+        margin-top: 100px;
+    }
 }
