@@ -10,11 +10,6 @@
     margin-bottom: 50px;
 }
 
-.card-title {
-    font-size: 20px;
-    text-align: center;
-    padding-bottom: 30px;
-}
 
 .card-ques {
     margin-bottom: 20px;
@@ -30,13 +25,27 @@
     text-align: left;
     margin: auto;
     margin-top: 20px;
-    width: 25%;
+    width: 200px;
 
 }
 
 .card-buttons {
     display: flex;
     justify-content: space-between;
+}
+
+.card-total {
+    justify-self: start;
+    padding-right: 20px;
+    margin-top: 20px;
+}
+
+.card-title {
+    width: 300px;
+    height: 55px;
+    margin: auto;
+    font-size: 18px;
+    text-align: left;
 }
 
 .submitbtn {
@@ -65,10 +74,8 @@
 }
 
 .main-container {
-    position: absolute;
-    left: 10%;
-    width: 80%;
-    height: 65%;
+    display: flex;
+    margin: auto;
     background-color: yellow;
     border-radius: 40px;
     justify-content: center;
@@ -76,6 +83,7 @@
     align-items: center;
     text-align: center;
     margin-top: 10%;
+    width: 500px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
@@ -124,4 +132,28 @@
     width: 100px;
     margin: auto;
     margin-bottom: 20px;
+}
+
+.result-title {
+    width: 300px;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.result-descr {
+    margin-top: 10px;
+    font-size: 20px;
+}
+
+.result-btn {
+    margin-top: 30px;
+    border-radius: 10px;
+    background-color: blue;
+    color: white;
+    border-color: white;
+    margin-bottom: 30px;
+}
+
+.result-btn:hover {
+    background-color: rgb(134, 134, 245);
 }

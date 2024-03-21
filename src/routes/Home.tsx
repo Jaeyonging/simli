@@ -12,7 +12,7 @@ export const Home = () => {
       </div>
       <div>
         <Choser></Choser>
-        {/* <CardView qtype={"8"} /> */}
+        {/* <CardView qtype={"8"} gender='100' /> */}
 
       </div>
     </div>

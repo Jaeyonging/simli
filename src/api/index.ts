@@ -8,10 +8,6 @@ export async function FetchQuestions(qtype: string) {
 
 export async function FetchResult(qtype: string, gender: string, qanswer: string) {
     const startDtm = Date.now().toString()
-    console.log("qtype: ", qtype)
-    console.log("gender", gender)
-    console.log("qanswer", qanswer)
-    console.log("time stamp", startDtm)
     return axios.post('http://www.career.go.kr/inspct/openapi/test/report', {
         apikey: `${qtestAPI}`,
         qestrnSeq: qtype,

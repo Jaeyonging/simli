@@ -20,12 +20,11 @@ export const CardView = ({ qtype, gender }: Props) => {
     const [nextbuttonText, setNextButtonText] = useState("다음")
     const [isSelected, setSeleccted] = useState(false)
     const qtestState = useSelector((state: RootState) => state.qtest);
-
+    console.log(qtype)
     const dispatch = useDispatch<AppDispatch>();
 
     useEffect(() => {
         FetchQuestions(qtype).then((res) => {
-            console.log(res.data.RESULT)
             setData(res.data.RESULT);
         });
 
@@ -80,7 +79,11 @@ export const CardView = ({ qtype, gender }: Props) => {
                             <div>Loading...</div>
                         ) : (
                             <>
-                                <h2 className='card-title'>{count + 1}/{data.length}{data[count].question}</h2>
+                                <h2 className='card-title'>{data[count].question}</h2>
+                                <div className='card-total'>
+                                    {count + 1}/{data.length}
+                                </div>
+
                                 <div className='card-ques'>
                                     <div className='radio-row'>
                                         <form onSubmit={handleFormSubmit}>
@@ -89,7 +92,6 @@ export const CardView = ({ qtype, gender }: Props) => {
                                                     <Radio name="answer" value={index.toString()} setValue={setAnswer}>
                                                         {index}. {data[count][`answer0${index}` as keyof QTest]}
                                                     </Radio>
-
                                                 </div>
                                             ))}
                                             <div className='card-buttons'>

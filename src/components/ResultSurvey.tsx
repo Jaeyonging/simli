@@ -15,24 +15,36 @@ export const ResultSurvey = ({ gender }: Props) => {
     const [result, setResult] = useState("")
     console.log(qtypeState)
     console.log(qanswerState)
+
     useEffect(() => {
         console.log(QMap.get(qtypeState)?.toString())
+        const questionType = QMap.get(qtypeState)?.toString();
 
-        FetchResult(QMap.get(qtypeState).toString(), gender, qanswerState).then((res) => {
-            console.log(res.data)
-            setResult(res.data.RESULT.url)
-        })
-
-
+        if (questionType) {
+            FetchResult(questionType, gender, qanswerState).then((res) => {
+                console.log(res.data)
+                setResult(res.data.RESULT.url)
+            })
+        }
     }, []);
 
     return (
         <>
-            검사 결과
-            <div>
-                결과 보러가기~!!
+            <div className='result-title'>
+                검사 결과
+            </div>
+
+            <div className='result-descr'>
+                결과 보러가기
                 <div>
-                    {result && <a href={result} target="_blank" rel="noopener noreferrer">{result}</a>}
+                    ↓↓↓
+                </div>
+                <div className='result-url'>
+                    {result && (
+                        <a href={result} target="_blank" rel="noopener noreferrer">
+                            <button className='result-btn'>Go to Result</button>
+                        </a>
+                    )}
                 </div>
 
             </div>
