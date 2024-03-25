@@ -52,8 +52,8 @@ export const CardView = ({ qtype, gender }: Props) => {
         if (count === data.length - 1) {
             dispatch(addAnswers(answer))
             setFinished(true)
-
             return;
+
         }
         if (count === data.length - 2) {
             setNextButtonText("결과보기");
@@ -81,7 +81,7 @@ export const CardView = ({ qtype, gender }: Props) => {
                             <>
                                 <h2 className='card-title'>{data[count].question}</h2>
                                 <div className='card-total'>
-                                    {count + 1}/{data.length}
+                                    {"<"}{count + 1}/{data.length}{">"}
                                 </div>
 
                                 <div className='card-ques'>
