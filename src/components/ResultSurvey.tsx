@@ -21,9 +21,12 @@ export const ResultSurvey = ({ gender }: Props) => {
             FetchResult(questionType, gender, qanswerState).then((res) => {
                 setResult(res.data.RESULT.url)
             })
+                .catch((err) => {
+                    console.log(err)
+                })
         }
     }, []);
-
+    console.log(result)
     return (
         <>
             <div className='result-title'>
@@ -36,11 +39,12 @@ export const ResultSurvey = ({ gender }: Props) => {
                     ↓↓↓
                 </div>
                 <div className='result-url'>
-                    {result && (
+                    {result ? (
                         <a href={result} target="_blank" rel="noopener noreferrer">
                             <button className='result-btn'>Go to Result</button>
                         </a>
-                    )}
+                    ) : (
+                        <div>Network Failed</div>)}
                 </div>
 
             </div>
