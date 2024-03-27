@@ -8,7 +8,7 @@ export async function FetchQuestions(qtype: string) {
 
 export async function FetchResult(qtype: string, gender: string, qanswer: string) {
     const startDtm = Date.now().toString()
-    return axios.post('https://www.career.go.kr/inspct/openapi/test/report', {
+    return axios.post('http://www.career.go.kr/inspct/openapi/test/report', {
         apikey: `${qtestAPI}`,
         qestrnSeq: qtype,
         trgetSe: "100209",
