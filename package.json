@@ -2,7 +2,7 @@
   "name": "practice",
   "private": true,
   "version": "0.0.0",
-  "proxy": "https://www.career.go.kr",
+  "proxy": "https://www.career.go.kr/inspct/openapi/test/report",
   "type": "module",
   "scripts": {
     "dev": "vite",
