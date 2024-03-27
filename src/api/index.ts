@@ -7,9 +7,17 @@ export async function FetchQuestions(qtype: string) {
 }
 
 
+const axiosInstance = axios.create({
+    baseURL: 'https://www.career.go.kr/inspct/openapi/test/report',
+    headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Content-Type': 'application/json',
+    },
+});
+
 export async function FetchResult(qtype: string, gender: string, qanswer: string) {
     const startDtm = Date.now().toString()
-    return axios.post('https://www.career.go.kr/inspct/openapi/test/report', {
+    return axiosInstance.post('', {
         apikey: `${qtestAPI}`,
         qestrnSeq: qtype,
         trgetSe: "100209",
