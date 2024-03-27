@@ -13,7 +13,6 @@ export const Choser = () => {
 
     const OnClickBtn = () => {
         if (qtypeState) {
-            console.log("onclick")
             setVisible(false)
             setQtype(QMap.get(qtypeState) || "");
         }

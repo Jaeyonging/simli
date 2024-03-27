@@ -13,16 +13,12 @@ export const ResultSurvey = ({ gender }: Props) => {
     const qtypeState = useSelector((state: RootState) => state.qType);
     const qanswerState = useSelector((state: RootState) => state.qtest);
     const [result, setResult] = useState("")
-    console.log(qtypeState)
-    console.log(qanswerState)
 
     useEffect(() => {
-        console.log(QMap.get(qtypeState)?.toString())
         const questionType = QMap.get(qtypeState)?.toString();
 
         if (questionType) {
             FetchResult(questionType, gender, qanswerState).then((res) => {
-                console.log(res.data)
                 setResult(res.data.RESULT.url)
             })
         }

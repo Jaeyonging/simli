@@ -20,7 +20,6 @@ export const CardView = ({ qtype, gender }: Props) => {
     const [nextbuttonText, setNextButtonText] = useState("다음")
     const [isSelected, setSeleccted] = useState(false)
     const qtestState = useSelector((state: RootState) => state.qtest);
-    console.log(qtype)
     const dispatch = useDispatch<AppDispatch>();
 
     useEffect(() => {
@@ -32,7 +31,6 @@ export const CardView = ({ qtype, gender }: Props) => {
 
     useEffect(() => {
         if (answer) {
-            console.log("anwer checked")
             setSeleccted(true)
         }
     }, [answer])
@@ -67,7 +65,6 @@ export const CardView = ({ qtype, gender }: Props) => {
 
     };
 
-    console.log(qtestState)
 
     return (
         <>
